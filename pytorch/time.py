@@ -49,11 +49,14 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.compiler == 'jit':
-        from torch.utils.cpp_extension import load
-        cuda_module = load(name="add2",
-                           extra_include_paths=["include"],
-                           sources=["pytorch/add2_ops.cpp", "kernel/add2_kernel.cu"],
-                           verbose=True)
+        import warnings
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            from torch.utils.cpp_extension import load
+            cuda_module = load(name="add2",
+                               extra_include_paths=["include"],
+                               sources=["pytorch/add2_ops.cpp", "kernel/add2_kernel.cu"],
+                               verbose=True)
     elif args.compiler == 'setup':
         import add2
     elif args.compiler == 'cmake':
