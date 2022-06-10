@@ -18,3 +18,6 @@ target_compile_features(warp_perspective PRIVATE cxx_std_14)
 target_link_libraries(warp_perspective "${TORCH_LIBRARIES}")
 # Link against OpenCV
 target_link_libraries(warp_perspective opencv_core opencv_imgproc)
+
+# build command
+# mkdir build && cd build &&  cmake -DCMAKE_PREFIX_PATH="$(python -c 'import torch.utils; print(torch.utils.cmake_prefix_path)')" ..
